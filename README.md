@@ -1,7 +1,6 @@
-<<<<<<< HEAD
-# firstapp
+# Flutter Task Manager App with the feature of Adding and Deleting a particular Task as per choice.
 
-A new Flutter project.
+A new Flutter Project.
 
 ## Getting Started
 
@@ -16,5 +15,5 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 =======
-# Flutter Task Manager App with the feature of Adding and Deleting a particular Task as per choice.
->>>>>>> origin/main
+![Screenshot (61)](https://github.com/hansupadhyay007/Flutter_Task_Manager_App/assets/112337432/09e208c7-3afb-4e7c-8335-cfcffe86b02c)
+![Screenshot (62)](https://github.com/hansupadhyay007/Flutter_Task_Manager_App/assets/112337432/5768dd77-2272-429f-a379-59262bd24369)
