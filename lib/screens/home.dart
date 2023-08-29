@@ -5,7 +5,6 @@ import 'package:firstapp/constants/colors.dart';
 import 'package:firstapp/widgets/todo_item.dart';
 import 'package:firstapp/model/todo.dart';
 import 'package:firstapp/task_list.dart';
-import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -15,13 +14,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final todoList = ToDo.todoList();
+  final todosList = ToDo.todoList();
   List<ToDo> _foundToDo = [];
   final _todoController = TextEditingController();
 
   @override
   void initState() {
-    _foundToDo = todoList;
+    _foundToDo = todosList;
     super.initState();
   }
 
@@ -33,68 +32,39 @@ class _HomeState extends State<Home> {
       body: Stack(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            padding: EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 15,
+            ),
             child: Column(
               children: [
-                Positioned.fill(
-                  top: 80,
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    child: Consumer<ThemeProvider>(
-                        builder: (context, Provider, child) {
-                      return DropdownButton<String>(
-                        value: Provider.currentTheme,
-                        items: [
-                          DropdownMenuItem<String>(
-                            value: 'light',
-                            child: Text(
-                              'Light',
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                          ),
-                          DropdownMenuItem<String>(
-                            value: 'dark',
-                            child: Text('Dark',
-                                style: Theme.of(context).textTheme.headline6),
-                          ),
-                          DropdownMenuItem<String>(
-                            value: 'system',
-                            child: Text('System',
-                                style: Theme.of(context).textTheme.headline6),
-                          )
-                        ],
-                        onChanged: (String? value) {
-                          Provider.changeTheme(value ?? 'system');
-                        },
-                      );
-                    }),
-                  ),
-                ),
                 searchBox(),
                 Expanded(
                   child: ListView(
                     children: [
                       Container(
-                        margin: const EdgeInsets.only(
+                        margin: EdgeInsets.only(
                           top: 50,
                           bottom: 20,
                         ),
-                        child: const Text(
+                        child: Text(
                           'TASKS LIST',
                           style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.w500),
+                            fontSize: 30,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                      for (ToDo toDo in todoList.reversed)
+                      for (ToDo todoo in _foundToDo.reversed)
                         ToDoItem(
-                          todo: toDo,
-                          onTodoChanged: _handleToDoChange,
+                          todo: todoo,
+                          onToDoChanged: _handleToDoChange,
                           onDeleteItem: _deleteToDoItem,
-                          onToDoChanged: (ToDo todo) {},
+                          onTodoChanged: (ToDo todo) {},
                         ),
                     ],
                   ),
-                ),
+                )
               ],
             ),
           ),
@@ -175,13 +145,13 @@ class _HomeState extends State<Home> {
 
   void _deleteToDoItem(String id) {
     setState(() {
-      todoList.removeWhere((item) => item.id == id);
+      todosList.removeWhere((item) => item.id == id);
     });
   }
 
   void _addToDoItem(String toDo) {
     setState(() {
-      todoList.add(ToDo(
+      todosList.add(ToDo(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         todoText: toDo,
       ));
@@ -192,9 +162,9 @@ class _HomeState extends State<Home> {
   void _runFilter(String enteredKeyword) {
     List<ToDo> results = [];
     if (enteredKeyword.isEmpty) {
-      results = todoList;
+      results = todosList;
     } else {
-      results = todoList
+      results = todosList
           .where((item) => item.todoText!
               .toLowerCase()
               .contains(enteredKeyword.toLowerCase()))
@@ -208,9 +178,11 @@ class _HomeState extends State<Home> {
 
   Widget searchBox() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(20)),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: TextField(
         onChanged: (value) => _runFilter(value),
         decoration: InputDecoration(
@@ -220,7 +192,10 @@ class _HomeState extends State<Home> {
             color: tdBlack,
             size: 20,
           ),
-          prefixIconConstraints: BoxConstraints(maxHeight: 20, minWidth: 25),
+          prefixIconConstraints: BoxConstraints(
+            maxHeight: 20,
+            minWidth: 25,
+          ),
           border: InputBorder.none,
           hintText: 'Search',
           hintStyle: TextStyle(color: tdGrey),
@@ -233,12 +208,20 @@ class _HomeState extends State<Home> {
     return AppBar(
       backgroundColor: Colors.red,
       elevation: 0,
-      title: Row(children: [
-        const Icon(
+      title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Icon(
           Icons.menu,
           color: tdBlack,
           size: 30,
-        )
+        ),
+        Container(
+          height: 40,
+          width: 40,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.asset('assets/images/avatar.jpeg'),
+          ),
+        ),
       ]),
     );
   }
