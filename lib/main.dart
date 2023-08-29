@@ -1,8 +1,8 @@
-import 'package:firstapp/theme_provider.dart';
+//import 'package:firstapp/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firstapp/screens/home.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+//import 'package:provider/provider.dart';
 //import 'package:firstapp/theme_provider.dart';
 
 void main() {

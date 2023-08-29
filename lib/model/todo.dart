@@ -25,10 +25,6 @@ class ToDo {
         id: '06',
         todoText: 'Dinner with Jenny',
       ),
-      ToDo(
-        id: '06',
-        todoText: 'Sleep By 9pm',
-      ),
     ];
   }
 }

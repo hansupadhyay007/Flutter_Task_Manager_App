@@ -60,7 +60,7 @@ class _HomeState extends State<Home> {
                           todo: todoo,
                           onToDoChanged: _handleToDoChange,
                           onDeleteItem: _deleteToDoItem,
-                          onTodoChanged: (ToDo todo) {},
+                          //onTodoChanged: (ToDo todo) {},
                         ),
                     ],
                   ),
@@ -217,10 +217,10 @@ class _HomeState extends State<Home> {
         Container(
           height: 40,
           width: 40,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image.asset('assets/images/avatar.jpeg'),
-          ),
+          // child: ClipRRect(
+          //   borderRadius: BorderRadius.circular(20),
+          //   child: Image.asset('assets/images/avatar.jpeg'),
+          // ),
         ),
       ]),
     );
